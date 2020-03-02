@@ -20,7 +20,7 @@ class Command {
     }
 
     // execute command
-    public function execute(&$block_to_pos, &$positions) {
+    public function execute(array &$block_to_pos, array &$positions) {
         if (!in_array($this->action, Command::ACTIONS)) {
             return false;
         }
@@ -38,7 +38,7 @@ class Command {
      * @param $positions
      * @return array
      */
-    private function move_onto(&$block_to_pos, &$positions) {
+    private function move_onto(array &$block_to_pos, array &$positions) {
         $this->put_back_upon($block_to_pos, $positions, $this->block_b); // pop all the blocks above b
         $this->move_over($block_to_pos, $positions);   // pop all the blocks above a and push a to b
     }
@@ -49,7 +49,7 @@ class Command {
      * @param $positions
      * @return array
      */
-    private function move_over(&$block_to_pos, &$positions) {
+    private function move_over(array &$block_to_pos, array &$positions) {
         // pop all the blocks above a
         $this->put_back_upon($block_to_pos, $positions, $this->block_a);  
         // push a to b 
@@ -65,7 +65,7 @@ class Command {
      * @param $positions
      * @return array
      */
-    private function pile_onto(&$block_to_pos, &$positions) {
+    private function pile_onto(array &$block_to_pos, array &$positions) {
         $this->put_back_upon($block_to_pos, $positions, $this->block_b);
         $this->pile_over($block_to_pos, $positions);
     }
@@ -76,7 +76,7 @@ class Command {
      * @param $positions
      * @return array
      */
-    private function pile_over(&$block_to_pos, &$positions) {
+    private function pile_over(array &$block_to_pos, array &$positions) {
          // find the block a index in the sub array of position array
         $block_a_pos = $block_to_pos[$this->block_a];
         $pos_blocks = &$positions[$block_a_pos];
@@ -95,7 +95,7 @@ class Command {
      * @param $positions
      * @param $block_i
      */
-    private function put_back_upon(&$block_to_pos, &$positions, $block_i) {
+    private function put_back_upon(array &$block_to_pos, array &$positions, int $block_i) {
         // find the block i index in the sub array of position array
         $block_i_pos = $block_to_pos[$block_i];
         $pos_blocks = &$positions[$block_i_pos];

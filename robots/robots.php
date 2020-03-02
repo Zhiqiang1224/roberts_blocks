@@ -6,18 +6,18 @@ use robots\Command;
 
 
 //check arg count
-// if ($argc != 2) {
-//     die ("unexpected arg count: {$argc}");
-// }
+if ($argc != 2) {
+    die ("unexpected arg count: {$argc}");
+}
 
-// // check if input file exists
-// $inputs = $argv[1];
-// if (!file_exists($inputs)) {
-//     die("input file {$inputs} not exists");
-// }
+// check if input file exists
+$inputs = $argv[1];
+if (!file_exists($inputs)) {
+    die("input file {$inputs} not exists");
+}
 
 // open file to read
-$file = fopen("D:\\Xampp\\htdocs\\robotsproj\\robots\\input.txt", "r");
+$file = fopen($inputs, "r");
 if (!$file) {
     die("cannot open file {$inputs}");
 }

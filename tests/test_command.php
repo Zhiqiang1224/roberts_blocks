@@ -21,11 +21,11 @@ class CommandTest extends TestCase {
 
     // test move onto
     public function test_move_onto() {
-        // no box to put back
+        // no block to put back
         $block_to_pos = [0, 1, 2, 3];
         $positions = [[0], [1], [2], [3]];
         $this->assertTrue((new Command("move 1 onto 2"))->execute($block_to_pos, $positions));
-        $this->assertTrue($block_to_pos === [0, 2, 2, 3]); // 1box in the postion 2
+        $this->assertTrue($block_to_pos === [0, 2, 2, 3]); // 1block in the postion 2
         $this->assertTrue($positions === [[0], [], [2, 1], [3]]);
         // src has more
         $block_to_pos = [0, 2, 2, 3];
@@ -49,7 +49,7 @@ class CommandTest extends TestCase {
 
     // test move over
     public function test_move_over() {
-        // no box to put back
+        // no block to put back
         $block_to_pos = [0, 1, 2, 3];
         $positions = [[0], [1], [2], [3]];
         $this->assertTrue((new Command("move 1 over 2"))->execute($block_to_pos, $positions));
@@ -77,7 +77,7 @@ class CommandTest extends TestCase {
 
     // test pile onto
     public function test_pile_onto() {
-        // no box to put back
+        // no block to put back
         $block_to_pos = [0, 1, 2, 3];
         $positions = [[0], [1], [2], [3]];
         $this->assertTrue((new Command("pile 1 onto 2"))->execute($block_to_pos, $positions));
@@ -105,7 +105,7 @@ class CommandTest extends TestCase {
 
     // test pile over
     public function test_pile_over() {
-        // no box to put back
+        // no block to put back
         $block_to_pos = [0, 1, 2, 3];
         $positions = [[0], [1], [2], [3]];
         $this->assertTrue((new Command("pile 1 over 2"))->execute($block_to_pos, $positions));
