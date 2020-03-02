@@ -39,8 +39,8 @@ class Command {
      * @return array
      */
     private function move_onto(&$block_to_pos, &$positions) {
-        $this->put_back_upon($block_to_pos, $positions, $this->block_b); // empty the b 
-        $this->move_over($block_to_pos, $positions);
+        $this->put_back_upon($block_to_pos, $positions, $this->block_b); // pop all the blocks above b
+        $this->move_over($block_to_pos, $positions);   // pop all the blocks above a and push a to b
     }
 
     /**
@@ -50,9 +50,12 @@ class Command {
      * @return array
      */
     private function move_over(&$block_to_pos, &$positions) {
-        $this->put_back_upon($block_to_pos, $positions, $this->block_a);
+        // pop all the blocks above a
+        $this->put_back_upon($block_to_pos, $positions, $this->block_a);  
+        // push a to b 
         array_pop($positions[$block_to_pos[$this->block_a]]);
         array_push($positions[$block_to_pos[$this->block_b]], $this->block_a);
+        // update the index array 
         $block_to_pos[$this->block_a] = $block_to_pos[$this->block_b];
     }
 
@@ -102,7 +105,7 @@ class Command {
         while (count($pos_boxes) > $block_i_pos_index + 1) {
             $block_back = array_pop($pos_boxes);
             array_push($positions[$block_back], $block_back); // back to init position in the position array
-            $block_to_pos[$block_back] = $block_back;         // back to init index in the block_to_pos array
+            $block_to_pos[$block_back] = $block_back;         // back to init index in index array
         }
     }
 
