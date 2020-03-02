@@ -1,0 +1,8 @@
+{
+    "name": "my/robots",
+    "description": "robot commands executor",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^8.0"
+    }
+}
