@@ -31,13 +31,24 @@ class Command {
         return true;
     }
 
-    // implement move onto
+    
+     /**
+     * implement move onto
+     * @param $block_to_pos
+     * @param $positions
+     * @return array
+     */
     private function move_onto(&$block_to_pos, &$positions) {
         $this->put_back_upon($block_to_pos, $positions, $this->block_b); // empty the b 
         $this->move_over($block_to_pos, $positions);
     }
 
-    // implement move over
+    /**
+     * implement move over
+     * @param $block_to_pos
+     * @param $positions
+     * @return array
+     */
     private function move_over(&$block_to_pos, &$positions) {
         $this->put_back_upon($block_to_pos, $positions, $this->block_a);
         array_pop($positions[$block_to_pos[$this->block_a]]);
@@ -45,17 +56,29 @@ class Command {
         $block_to_pos[$this->block_a] = $block_to_pos[$this->block_b];
     }
 
-    // implement pile onto
+     /**
+     * implement pile onto
+     * @param $block_to_pos
+     * @param $positions
+     * @return array
+     */
     private function pile_onto(&$block_to_pos, &$positions) {
         $this->put_back_upon($block_to_pos, $positions, $this->block_b);
         $this->pile_over($block_to_pos, $positions);
     }
 
-    // implement pile over
+     /**
+     * implement pile over
+     * @param $block_to_pos
+     * @param $positions
+     * @return array
+     */
     private function pile_over(&$block_to_pos, &$positions) {
+         // find the block a index in the sub array of position array
         $block_a_pos = $block_to_pos[$this->block_a];
         $pos_blocks = &$positions[$block_a_pos];
         $block_a_pos_index = array_search($this->block_a, $pos_blocks);
+         // loop push the all the blocks above the block b which including itself
         while (count($pos_blocks) > $block_a_pos_index) {
             $block_i = array_splice($pos_blocks, $block_a_pos_index, 1)[0];
             array_push($positions[$block_to_pos[$this->block_b]], $block_i);
@@ -63,15 +86,23 @@ class Command {
         }
     }
 
-    // put box upon given one back to initial position
-    private function put_back_upon(&$block_to_pos, &$positions, $block_i) {
+     /**
+     * put box upon given one back to initial position
+     * @param $block_to_pos
+     * @param $positions
+     * @param $block_i
+     * @return array
+     */
+    private function put_back_upon(array &$block_to_pos, array &$positions, int $block_i): array {
+        // find the block i index in the sub array of position array
         $block_i_pos = $block_to_pos[$block_i];
         $pos_boxes = &$positions[$block_i_pos];
         $block_i_pos_index = array_search($block_i, $pos_boxes);
+        // loop remove the all the blocks above the block i 
         while (count($pos_boxes) > $block_i_pos_index + 1) {
             $block_back = array_pop($pos_boxes);
-            array_push($positions[$block_back], $block_back);
-            $block_to_pos[$block_back] = $block_back;
+            array_push($positions[$block_back], $block_back); // back to init position in the position array
+            $block_to_pos[$block_back] = $block_back;         // back to init index in the block_to_pos array
         }
     }
 

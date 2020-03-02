@@ -23,10 +23,10 @@ if (!$file) {
 }
 
 // init boxes
-$box_count = (int) fgets($file);
-for ($i=0; $i < $box_count; $i++) { 
-    $box_to_pos[$i] = [$i];
-    //$positions[$i] = [$i];
+$block_count = (int) fgets($file);
+for ($i=0; $i < $block_count; $i++) { 
+    $block_to_pos[$i] = [$i];
+    $positions[$i] = [$i];
 }
 
 // execute commands
@@ -38,6 +38,6 @@ while (!feof($file) && ($command = trim(fgets($file))) != "quit") {
 fclose($file);
 
 // print result
-foreach ($box_to_pos as $pos => $pos_boxes) {
-    echo $pos . ":" . rtrim(" " . implode(" ", $pos_boxes)) . "\n";
+foreach ($block_to_pos as $pos => $pos_blocks) {
+    echo $pos . ":" . rtrim(" " . implode(" ", $pos_blocks)) . "\n";
 }
