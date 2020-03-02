@@ -90,20 +90,19 @@ class Command {
     }
 
      /**
-     * put box upon given one back to initial position
+     * put block upon given one back to initial position
      * @param $block_to_pos
      * @param $positions
      * @param $block_i
-     * @return array
      */
-    private function put_back_upon(array &$block_to_pos, array &$positions, int $block_i): array {
+    private function put_back_upon(&$block_to_pos, &$positions, $block_i) {
         // find the block i index in the sub array of position array
         $block_i_pos = $block_to_pos[$block_i];
-        $pos_boxes = &$positions[$block_i_pos];
-        $block_i_pos_index = array_search($block_i, $pos_boxes);
+        $pos_blocks = &$positions[$block_i_pos];
+        $block_i_pos_index = array_search($block_i, $pos_blocks);
         // loop remove the all the blocks above the block i 
-        while (count($pos_boxes) > $block_i_pos_index + 1) {
-            $block_back = array_pop($pos_boxes);
+        while (count($pos_blocks) > $block_i_pos_index + 1) {
+            $block_back = array_pop($pos_blocks);
             array_push($positions[$block_back], $block_back); // back to init position in the position array
             $block_to_pos[$block_back] = $block_back;         // back to init index in index array
         }
