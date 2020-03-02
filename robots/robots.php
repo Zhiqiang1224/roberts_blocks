@@ -5,7 +5,7 @@ require_once __DIR__ . "/command.php";
 use robots\Command;
 
 
-check arg count
+//check arg count
 if ($argc != 2) {
     die ("unexpected arg count: {$argc}");
 }
